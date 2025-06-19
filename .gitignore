@@ -1,0 +1,7 @@
+downloaded_images
+sam_segmented
+sorted
+uploaded_images
+*.pth
+validation_set
+wandb
