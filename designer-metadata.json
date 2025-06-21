@@ -140,7 +140,6 @@
   "the_candy_pink_sequins_pants": {
     "checkout_link": "https://gavelparis.com/product/the-candy-pink-sequins-pants/"
   },
-
   "black_cut_out_velvet_gown_with_red_crystal_embellishments": {
     "checkout_link": "https://marinakarelian.com/products/black-cut-out-velvet-gown-with-red-crystal-embellishments"
   },
@@ -174,6 +173,9 @@
   "monde_wrangler_cowboy_hat": {
     "checkout_link": "https://reaumonde.com/products/monde-wrangler-cowboy-hat"
   },
+  "monde_wrangler_cowboy_hat_custom_green": {
+    "checkout_link": "https://reaumonde.com/products/monde-wrangler-cowboy-hat"
+  },
   "rm_livestock_rodeo_tee": {
     "checkout_link": "https://reaumonde.com/products/rm-livestock-rodeo-tee"
   },
@@ -186,7 +188,6 @@
   "the-jones-fedora": {
     "checkout_link": "https://reaumonde.com/products/the-jones-fedora"
   },
-
   "neon_belted_dress_with_brooch": {
     "checkout_link": "https://www.omarmansoor.com/product-page/neon-belted-dress-with-brooch"
   },
@@ -399,5 +400,92 @@
   },
   "frilled_front_open_lace_gown": {
     "checkout_link": "https://www.omarmansoor.com/product-page/frilled-front-open-lace-gown"
+  },
+  "plum_velvet_cut-out_gown_with_embellished_sleeves": {
+    "checkout_link": "https://marinakarelian.com/products/plum-velvet-cut-out-gown-with-embellished-sleeves"
+  },
+  "elegant_silver_satin_cut-out_evening_gown_with_embellishments": {
+    "checkout_link": "https://marinakarelian.com/products/elegant-silver-satin-cut-out-evening-gown-with-embellishments"
+  },
+  "black_cut-out_velvet_gown_with_red_crystal_embellishments": {
+    "checkout_link": "https://marinakarelian.com/products/black-cut-out-velvet-gown-with-red-crystal-embellishments"
+  },
+  "the_parot_collar": {
+    "checkout_link": "https://gavelparis.com/product/tainted-allure/"
+  },
+  "the_simon_vest_arctic_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/deadly-petals/"
+  },
+  "the_dalida_asymmetric_kimono": {
+    "checkout_link": "https://gavelparis.com/product/womens-asymmetric-kimono-with-feathers/"
+  },
+  "the_cruella_symmetric_kimono": {
+    "checkout_link": "https://gavelparis.com/product/womens-symmetric-kimono-with-feathers/"
+  },
+  "the_jacquie_kimono": {
+    "checkout_link": "https://gavelparis.com/product/venom-veil/"
+  },
+  "the_simon_vest_red_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/mens-fur-vest-red-fox-nightshade-whisper/"
+  },
+  "the_river_long_dress": {
+    "checkout_link": "https://gavelparis.com/product/dress-with-feathers/"
+  },
+  "the_anna_hooded_raincoat": {
+    "checkout_link": "https://gavelparis.com/product/hooded-raincoat/"
+  },
+  "the_alma_hooded_cape": {
+    "checkout_link": "https://gavelparis.com/product/hooded-cape/"
+  },
+  "the_jessy_parka_black_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/womens-winter-parka-black-fox-fur-fiery-touch/"
+  },
+  "the_jade_cape": {
+    "checkout_link": "https://gavelparis.com/product/mens-cape-with-feathers/"
+  },
+  "the_jessica_parka_raccoon_fur": {
+    "checkout_link": "https://gavelparis.com/product/womens-winter-khaki-parka-raccoon-fox-fur-fiery-touch/"
+  },
+  "the_ralph_parka_black_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/mens-winter-parka-black-fox-fur-fiery-touch/"
+  },
+  "the_ralph_parka_raccoon_fur": {
+    "checkout_link": "https://gavelparis.com/product/serpents-kiss/"
+  },
+  "the_alice_coat": {
+    "checkout_link": "https://gavelparis.com/product/womens-black-coat-black-hemlock/"
+  },
+  "the_simon_vest_silver_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/mens-fur-vest-silver-fox-nightshade-whisper/"
+  },
+  "the_eve_short_arctic_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/eves-enchantment/"
+  },
+  "the_jessica_parka_red_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/womens-winter-khaki-parka-red-fox-fur-fiery-touch/"
+  },
+  "the_elane_coat": {
+    "checkout_link": "https://gavelparis.com/product/mens-black-coat-black-hemlock/"
+  },
+  "the_ralph_parka_silver_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/forbidden-ivy/"
+  },
+  "the_jessy_parka_red_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/womens-winter-black-parka-red-fox-fur-fiery-touch/"
+  },
+  "the_ralph_parka_red_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/mens-winter-parka-red-fox-fur-forbidden-ivy/"
+  },
+  "the_ava_fur_coat": {
+    "checkout_link": "https://gavelparis.com/product/womens-arctic-fox-fur/"
+  },
+  "the_damon_black_shirt": {
+    "checkout_link": "https://gavelparis.com/product/venomous-night/"
+  },
+  "the_jessy_parka_silver_fox_fur": {
+    "checkout_link": "https://gavelparis.com/product/womens-winter-black-parka-silver-fox-fur-fiery-touch/"
+  },
+  "the_elise_long_dress": {
+    "checkout_link": "https://gavelparis.com/product/venomous-blossom/"
   }
 }
