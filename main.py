@@ -16,7 +16,7 @@ import clip
 load_dotenv()
 DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
-app = FastAPI()
+app = FastAPI(title="Fashion Recognition API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -65,6 +65,27 @@ def startup_event():
         
     print("--- Models and data loaded successfully ---")
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for deployment monitoring."""
+    return {
+        "status": "healthy",
+        "models_loaded": all([model is not None, preprocess is not None, product_index is not None, designer_metadata is not None]),
+        "device": DEVICE,
+        "product_count": len(product_index) if product_index else 0
+    }
+
+@app.get("/")
+async def root():
+    """Root endpoint with API information."""
+    return {
+        "message": "Fashion Recognition API",
+        "version": "1.0.0",
+        "endpoints": {
+            "classify": "/classify - Upload image for fashion recognition",
+            "health": "/health - Health check endpoint"
+        }
+    }
 
 def get_image_embedding(image: Image.Image) -> np.ndarray:
     """Generates a vector embedding for a single PIL image."""
@@ -129,5 +150,5 @@ async def classify_outfit(file: UploadFile = File(...), top_n: int = 5):
 
 if __name__ == "__main__":
     
-    port = int(os.environ.get("PORT", 4000))
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
