@@ -5,3 +5,6 @@ uploaded_images
 *.pth
 validation_set
 wandb
+images/
+test_imgs/
+.DS_Store
