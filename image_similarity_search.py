@@ -40,54 +40,91 @@ def get_image_embedding(image_path):
 
 def index_images(root_dir, index_file):
     """
-    Crawls directories to create an average 'meta-embedding' for each product folder.
-    This is a one-time process to build your searchable library of products.
+    Crawls directories to create embeddings for products.
+    Handles both nested (designer/product/images) and flat (designer/individual_images) structures.
+    For flat structures, each image is treated as its own product.
     """
     print(f"Starting product indexing for directory: {root_dir}")
 
-    # Find all the leaf directories which are assumed to be product folders
-    all_product_folders = []
+    # Find all the product folders and individual images
+    all_product_items = []
     for designer_folder in os.listdir(root_dir):
         designer_path = os.path.join(root_dir, designer_folder)
         if not os.path.isdir(designer_path):
             continue
-        for product_folder in os.listdir(designer_path):
-            product_path = os.path.join(designer_path, product_folder)
-            if os.path.isdir(product_path):
-                all_product_folders.append(product_path)
+            
+        # Check if this designer uses nested structure (designer/product/images)
+        has_nested_products = False
+        for subitem in os.listdir(designer_path):
+            subitem_path = os.path.join(designer_path, subitem)
+            if os.path.isdir(subitem_path):
+                # Check if this subdirectory contains images (nested structure)
+                has_images = any(
+                    os.path.isfile(os.path.join(subitem_path, f)) 
+                    for f in os.listdir(subitem_path) 
+                    if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+                )
+                if has_images:
+                    has_nested_products = True
+                    all_product_items.append(("folder", subitem_path))
+        
+        # If no nested products found, treat each image as its own product (flat structure)
+        if not has_nested_products:
+            # Check if the designer folder contains images directly
+            image_files = [
+                f for f in os.listdir(designer_path) 
+                if f.lower().endswith(('.jpg', '.jpeg', '.png'))
+            ]
+            if image_files:
+                print(f"Found flat structure for designer: {designer_folder} with {len(image_files)} images")
+                for image_file in image_files:
+                    image_path = os.path.join(designer_path, image_file)
+                    all_product_items.append(("image", image_path))
 
-    if not all_product_folders:
-        print("Error: No product folders found in the specified directory structure.")
+    if not all_product_items:
+        print("Error: No products found in the specified directory structure.")
         return
 
-    print(f"Found {len(all_product_folders)} product folders to index.")
+    print(f"Found {len(all_product_items)} products to index.")
 
     embeddings_data = []
-    for folder_path in tqdm(all_product_folders, desc="Indexing Product Folders"):
-        extensions = ["*.jpg", "*.jpeg", "*.png"]
-        image_paths_in_folder = []
-        for ext in extensions:
-            image_paths_in_folder.extend(glob(os.path.join(folder_path, ext)))
+    for item_type, item_path in tqdm(all_product_items, desc="Indexing Products"):
+        if item_type == "folder":
+            # Handle nested structure: average all images in the folder
+            extensions = ["*.jpg", "*.jpeg", "*.png"]
+            image_paths_in_folder = []
+            for ext in extensions:
+                image_paths_in_folder.extend(glob(os.path.join(item_path, ext)))
 
-        if not image_paths_in_folder:
-            continue
+            if not image_paths_in_folder:
+                continue
 
-        folder_embeddings = []
-        for img_path in image_paths_in_folder:
-            embedding = get_image_embedding(img_path)
+            folder_embeddings = []
+            for img_path in image_paths_in_folder:
+                embedding = get_image_embedding(img_path)
+                if embedding is not None:
+                    folder_embeddings.append(embedding)
+            
+            if not folder_embeddings:
+                continue
+
+            # Average the embeddings for the current folder to create a 'meta-embedding'
+            avg_embedding = np.mean(folder_embeddings, axis=0)
+            avg_embedding /= np.linalg.norm(avg_embedding)
+            
+            embeddings_data.append({"product_folder": item_path, "embedding": avg_embedding})
+            
+        elif item_type == "image":
+            # Handle flat structure: each image is its own product
+            embedding = get_image_embedding(item_path)
             if embedding is not None:
-                folder_embeddings.append(embedding)
-        
-        if not folder_embeddings:
-            continue
-
-        # Average the embeddings for the current folder to create a 'meta-embedding'
-        avg_embedding = np.mean(folder_embeddings, axis=0)
-        
-        # Normalize the averaged embedding to ensure it's a unit vector
-        avg_embedding /= np.linalg.norm(avg_embedding)
-        
-        embeddings_data.append({"product_folder": folder_path, "embedding": avg_embedding})
+                # Create a virtual folder path for the image
+                # Format: images/designer/image_name (without extension)
+                designer_name = os.path.basename(os.path.dirname(item_path))
+                image_name = os.path.splitext(os.path.basename(item_path))[0]
+                virtual_folder = os.path.join("images", designer_name, image_name)
+                
+                embeddings_data.append({"product_folder": virtual_folder, "embedding": embedding})
 
     print(f"Successfully indexed {len(embeddings_data)} products.")
 

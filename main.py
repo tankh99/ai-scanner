@@ -116,7 +116,7 @@ async def classify_outfit(file: UploadFile = File(...), top_n: int = 5):
             
             # 3. Use the correct string key to look up the metadata
             metadata = designer_metadata.get(metadata_key, {})
-            print(designer_metadata, metadata, metadata_key)
+            print(metadata_key, metadata)
             results.append({
                 "confidence": float(similarities[position]),
                 "outfit_url": metadata.get("checkout_link", "URL not found")
