@@ -116,7 +116,6 @@ async def classify_outfit(file: UploadFile = File(...), top_n: int = 5):
             
             # 3. Use the correct string key to look up the metadata
             metadata = designer_metadata.get(metadata_key, {})
-            print(metadata_key, metadata)
             results.append({
                 "confidence": float(similarities[position]),
                 "outfit_url": metadata.get("checkout_link", "URL not found")
@@ -130,5 +129,5 @@ async def classify_outfit(file: UploadFile = File(...), top_n: int = 5):
 
 if __name__ == "__main__":
     
-    port = os.environ.get("PORT", 4000)
+    port = int(os.environ.get("PORT", 4000))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
